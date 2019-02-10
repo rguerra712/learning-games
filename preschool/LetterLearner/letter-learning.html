@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Daily Puzzles</title>
+    <link rel="stylesheet" type="text/css" href="css/letters.css" onkeypress="onLetterTyped"></link>
+</head>
+
+<body>
+    <div class="flex-container options">
+        <input id="isUpperCase" type="checkbox">UpperCase</input>
+    </div>
+    <div>
+        <h1 id="currentLetter" class="flex-container letter" onkeypress="onLetterTyped" />
+    </div>
+</body>
+
+<script type="text/javascript">
+    document.addEventListener('keypress', function(e) {
+    	const key = e.key;
+        const currentLetter = document.getElementById('currentLetter');
+        const isUpperCase = document.getElementById('isUpperCase').checked;
+        currentLetter.innerHTML = isUpperCase ? key.toUpperCase() : key.toLowerCase();
+        const text = `${(isUpperCase ? "Big" : "Little")} ${key}`;
+        speak(text);
+    });
+
+    function speak(text) {
+      var msg = new SpeechSynthesisUtterance(text);
+	  msg.rate = .75;
+	  speechSynthesis.speak(msg);
+	}
+</script>
+
+</html>
